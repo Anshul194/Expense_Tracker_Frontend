@@ -33,7 +33,7 @@ const ExpenseModal = ({ isOpen, onClose, onSubmit, editData, categories, loading
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title={editData ? 'Edit Expense' : 'Add New Expense'}>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
                 <Input
                     label="Expense Title"
                     placeholder="e.g. Starbucks Coffee"
@@ -41,7 +41,7 @@ const ExpenseModal = ({ isOpen, onClose, onSubmit, editData, categories, loading
                     error={errors.title?.message}
                 />
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                         <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1 mb-2 block">Amount</label>
                         <div className="relative">
@@ -66,7 +66,7 @@ const ExpenseModal = ({ isOpen, onClose, onSubmit, editData, categories, loading
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                         <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1 mb-2 block">Category</label>
                         <select

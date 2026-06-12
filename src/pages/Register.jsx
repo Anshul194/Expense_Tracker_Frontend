@@ -60,14 +60,22 @@ const Register = () => {
                 </div>
             </div>
 
-            <div className="flex-1 flex items-center justify-center p-6 lg:p-12 relative">
-                <Card className="w-full max-w-lg p-8 lg:p-10 border-none lg:border shadow-none lg:shadow-premium bg-transparent lg:bg-white dark:lg:bg-slate-900">
-                    <div className="mb-8">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Create Account</h2>
-                        <p className="text-slate-500 dark:text-slate-400">Join Expense Tracker today</p>
+            <div className="flex-1 flex items-center justify-center px-4 py-24 sm:p-6 lg:p-12 relative">
+                {/* Mobile Logo */}
+                <div className="absolute top-4 left-4 sm:top-10 sm:left-10 lg:hidden flex items-center gap-2">
+                    <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+                        <span className="font-bold">E</span>
+                    </div>
+                    <span className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Expense Tracker</span>
+                </div>
+
+                <Card className="w-full max-w-lg p-6 sm:p-8 lg:p-10 border-none lg:border shadow-none lg:shadow-premium bg-transparent lg:bg-white dark:lg:bg-slate-900">
+                    <div className="mb-6 sm:mb-8">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">Create Account</h2>
+                        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">Join Expense Tracker today</p>
                     </div>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
                         <Input
                             label="Full Name"
                             placeholder="John Doe"
@@ -86,8 +94,8 @@ const Register = () => {
                             error={errors.email?.message}
                         />
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="relative">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
                                 <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1">Password</label>
                                 <div className="relative mt-1.5">
                                     <input
@@ -110,7 +118,7 @@ const Register = () => {
                                 {errors.password && <p className="text-xs text-red-500 mt-1 ml-1">{errors.password.message}</p>}
                             </div>
 
-                            <div className="relative">
+                            <div>
                                 <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1">Confirm</label>
                                 <div className="relative mt-1.5">
                                     <input
@@ -132,13 +140,13 @@ const Register = () => {
                             </div>
                         )}
 
-                        <Button type="submit" loading={loading} className="w-full py-3.5 text-lg font-bold mt-2">
+                        <Button type="submit" loading={loading} className="w-full py-3 sm:py-3.5 text-base sm:text-lg font-bold">
                             Get Started
                             <ArrowRight size={20} />
                         </Button>
                     </form>
 
-                    <p className="mt-8 text-center text-slate-500 dark:text-slate-400 text-sm font-medium">
+                    <p className="mt-6 sm:mt-8 text-center text-slate-500 dark:text-slate-400 text-sm font-medium">
                         Already have an account? <Link to="/login" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Sign In Instead</Link>
                     </p>
                 </Card>

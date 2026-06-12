@@ -49,34 +49,32 @@ const Login = () => {
             </div>
 
             {/* Right Side: Form */}
-            <div className="flex-1 flex items-center justify-center p-6 lg:p-12 relative overflow-hidden">
+            <div className="flex-1 flex items-center justify-center px-4 py-24 sm:p-6 lg:p-12 relative overflow-hidden">
                 {/* Mobile Logo */}
-                <div className="absolute top-10 left-10 lg:hidden flex items-center gap-2">
+                <div className="absolute top-4 left-4 sm:top-10 sm:left-10 lg:hidden flex items-center gap-2">
                     <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
                         <span className="font-bold">E</span>
                     </div>
-                    <span className="font-bold text-slate-900 dark:text-white">Expense Tracker</span>
+                    <span className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Expense Tracker</span>
                 </div>
 
-                <Card className="w-full max-w-md p-8 lg:p-10 border-none lg:border shadow-none lg:shadow-premium bg-transparent lg:bg-white dark:lg:bg-slate-900">
-                    <div className="mb-10 text-center lg:text-left">
-                        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Welcome back</h2>
-                        <p className="text-slate-500 dark:text-slate-400">Enter your credentials to access your account</p>
+                <Card className="w-full max-w-md p-6 sm:p-8 lg:p-10 border-none lg:border shadow-none lg:shadow-premium bg-transparent lg:bg-white dark:lg:bg-slate-900">
+                    <div className="mb-8 sm:mb-10 text-center lg:text-left">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">Welcome back</h2>
+                        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">Enter your credentials to access your account</p>
                     </div>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 sm:space-y-6">
                         <div className="space-y-4">
-                            <div className="relative">
-                                <Input
-                                    label="Email Address"
-                                    type="email"
-                                    placeholder="name@company.com"
-                                    {...register("email", { required: "Email is required" })}
-                                    error={errors.email?.message}
-                                />
-                            </div>
+                            <Input
+                                label="Email Address"
+                                type="email"
+                                placeholder="name@company.com"
+                                {...register("email", { required: "Email is required" })}
+                                error={errors.email?.message}
+                            />
 
-                            <div className="relative">
+                            <div>
                                 <div className="flex justify-between items-center mb-1">
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1">Password</label>
                                     <button type="button" className="text-xs text-indigo-600 font-semibold hover:underline">Forgot?</button>
@@ -100,7 +98,7 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-2 px-1 text-sm text-slate-600 dark:text-slate-400 font-medium">
+                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 font-medium">
                             <input type="checkbox" className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer" />
                             <label>Remember me for 30 days</label>
                         </div>
@@ -111,13 +109,13 @@ const Login = () => {
                             </div>
                         )}
 
-                        <Button type="submit" loading={loading} className="w-full py-3.5 text-lg font-bold">
+                        <Button type="submit" loading={loading} className="w-full py-3 sm:py-3.5 text-base sm:text-lg font-bold">
                             Sign In
                             <ArrowRight size={20} />
                         </Button>
                     </form>
 
-                    <p className="mt-8 text-center text-slate-500 dark:text-slate-400 text-sm font-medium">
+                    <p className="mt-6 sm:mt-8 text-center text-slate-500 dark:text-slate-400 text-sm font-medium">
                         Don't have an account? <Link to="/register" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Join Expense Tracker</Link>
                     </p>
                 </Card>

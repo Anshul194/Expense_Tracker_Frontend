@@ -40,27 +40,27 @@ const GlobalNotification = () => {
                     />
 
                     {/* Modal Container */}
-                    <div className="fixed inset-0 flex items-center justify-center p-4 z-[110] pointer-events-none">
+                    <div className="fixed inset-0 flex items-center justify-center p-3 sm:p-4 z-[110] pointer-events-none">
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="bg-white dark:bg-slate-900 w-full max-w-sm rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden pointer-events-auto"
+                            className="bg-white dark:bg-slate-900 w-full max-w-sm rounded-[1.5rem] sm:rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden pointer-events-auto mx-2 sm:mx-0"
                         >
-                            <div className="p-8 text-center space-y-6">
-                                <div className={`w-20 h-20 rounded-3xl mx-auto flex items-center justify-center border transition-all ${getTheme()}`}>
+                            <div className="p-6 sm:p-8 text-center space-y-4 sm:space-y-6">
+                                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl mx-auto flex items-center justify-center border transition-all ${getTheme()}`}>
                                     {getIcon()}
                                 </div>
 
                                 <div className="space-y-2">
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white capitalize">{title}</h3>
-                                    <p className="text-slate-500 font-medium leading-relaxed">{message}</p>
+                                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white capitalize">{title}</h3>
+                                    <p className="text-sm sm:text-base text-slate-500 font-medium leading-relaxed">{message}</p>
                                 </div>
 
                                 <Button
                                     onClick={() => dispatch(hideNotification())}
                                     variant={type === 'error' ? 'danger' : 'primary'}
-                                    className="w-full py-3.5 rounded-2xl font-bold transition-all hover:scale-[1.02]"
+                                    className="w-full py-3 sm:py-3.5 rounded-2xl font-bold transition-all hover:scale-[1.02] text-sm sm:text-base"
                                 >
                                     Confirm
                                 </Button>

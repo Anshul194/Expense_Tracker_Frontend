@@ -31,7 +31,7 @@ const CategoryModal = ({ isOpen, onClose, onSubmit, editData, loading }) => {
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} title={editData ? 'Edit Category' : 'New Category'}>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 <Input
                     label="Category Name"
                     placeholder="e.g. Groceries"
@@ -54,13 +54,13 @@ const CategoryModal = ({ isOpen, onClose, onSubmit, editData, loading }) => {
 
                 <div>
                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1 mb-3 block">Choose Icon</label>
-                    <div className="grid grid-cols-6 gap-2">
+                    <div className="grid grid-cols-5 sm:grid-cols-6 gap-2">
                         {ICONS.map(icon => (
                             <button
                                 key={icon}
                                 type="button"
                                 onClick={() => setValue('icon', icon)}
-                                className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl transition-all ${selectedIcon === icon
+                                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-lg sm:text-xl transition-all ${selectedIcon === icon
                                     ? 'bg-indigo-600 text-white scale-110 shadow-lg shadow-indigo-500/30'
                                     : 'bg-slate-50 dark:bg-slate-800 text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700'
                                     }`}
@@ -73,13 +73,13 @@ const CategoryModal = ({ isOpen, onClose, onSubmit, editData, loading }) => {
 
                 <div>
                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300 ml-1 mb-3 block">Theme Color</label>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                         {COLORS.map(color => (
                             <button
                                 key={color}
                                 type="button"
                                 onClick={() => setValue('color', color)}
-                                className={`w-8 h-8 rounded-full border-2 transition-all ${selectedColor === color ? 'border-indigo-600 scale-125' : 'border-transparent'
+                                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 transition-all ${selectedColor === color ? 'border-indigo-600 scale-110 sm:scale-125' : 'border-transparent'
                                     }`}
                                 style={{ backgroundColor: color }}
                             />

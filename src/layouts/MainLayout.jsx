@@ -293,7 +293,7 @@ const MainLayout = ({ children }) => {
             )}>
 
                 {/* ── Topbar ── */}
-                <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 h-14 flex items-center px-4 lg:px-6 gap-4">
+                <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 h-14 flex items-center px-3 sm:px-4 lg:px-6 gap-2 sm:gap-4">
 
                     {/* Mobile hamburger */}
                     <button
