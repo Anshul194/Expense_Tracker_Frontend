@@ -1,10 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
-    withCredentials: true
-});
+import api from '../../api/config';
 
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
     try {

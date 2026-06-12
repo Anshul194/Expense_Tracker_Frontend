@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const api = axios.create({ baseURL: 'http://localhost:5000/api', withCredentials: true });
-const getConfig = () => ({ headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
+import api, { getConfig } from '../../api/config';
 
 export const fetchCategories = createAsyncThunk('categories/fetchAll', async (_, { rejectWithValue }) => {
     try {

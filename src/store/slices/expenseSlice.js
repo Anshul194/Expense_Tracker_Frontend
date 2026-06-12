@@ -1,15 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
-    withCredentials: true
-});
-
-// helper to get auth config
-const getConfig = () => ({
-    headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
-});
+import api, { getConfig } from '../../api/config';
 
 export const fetchExpenses = createAsyncThunk('expenses/fetchAll', async (params, { rejectWithValue }) => {
     try {
