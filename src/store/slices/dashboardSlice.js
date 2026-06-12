@@ -12,9 +12,9 @@ export const fetchDashboardData = createAsyncThunk('dashboard/fetchAll', async (
 
         return {
             summary: summary.data.data,
-            breakdown: breakdown.data.data.breakdown,
-            trends: trends.data.data.trends,
-            budget: budget.data.data.budgetStatus
+            breakdown: breakdown.data.breakdown,
+            trends: trends.data.data,
+            budget: budget.data.data
         };
     } catch (err) {
         return rejectWithValue('Failed to fetch dashboard data');

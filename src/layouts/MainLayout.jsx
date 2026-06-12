@@ -100,7 +100,7 @@ const MainLayout = ({ children }) => {
         { name: 'Expenses', path: '/expenses', icon: ReceiptIndianRupee, section: 'main' },
         { name: 'Categories', path: '/categories', icon: Layers, section: 'main' },
         { name: 'AI Insights', path: '/ai', icon: BrainCircuit, section: 'tools' },
-        { name: 'Profile', path: '/profile', icon: UserIcon, section: 'account' },
+        // { name: 'Profile', path: '/profile', icon: UserIcon, section: 'account' },
     ];
 
     const mainNav = navItems.filter(i => i.section === 'main');
@@ -123,11 +123,11 @@ const MainLayout = ({ children }) => {
                 collapsed && !isMobile ? 'justify-center px-0' : ''
             )}>
                 <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white shrink-0 shadow-md shadow-indigo-500/25">
-                    <span className="font-bold text-base">N</span>
+                    <span className="font-bold text-base">E</span>
                 </div>
                 {(!collapsed || isMobile) && (
                     <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
-                        NexPrism
+                        Expense Tracker
                     </span>
                 )}
             </div>
@@ -176,27 +176,7 @@ const MainLayout = ({ children }) => {
                     </div>
                 </div>
 
-                {/* Account */}
-                <div>
-                    {(!collapsed || isMobile) && (
-                        <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-600 px-3 mb-1.5">
-                            Account
-                        </p>
-                    )}
-                    {collapsed && !isMobile && (
-                        <div className="h-px bg-slate-100 dark:bg-slate-800 mb-2 mx-2" />
-                    )}
-                    <div className="space-y-0.5">
-                        {accountNav.map(item => (
-                            <NavItem
-                                key={item.path}
-                                item={item}
-                                collapsed={collapsed && !isMobile}
-                                onClick={() => isMobile && setSidebarOpen(false)}
-                            />
-                        ))}
-                    </div>
-                </div>
+
             </nav>
 
             {/* User card + logout */}

@@ -40,9 +40,17 @@ const Expenses = () => {
     const [filters, setFilters] = useState({
         search: '',
         categoryId: '',
+        startDate: '',
+        endDate: '',
+        minAmount: '',
+        maxAmount: '',
+        paymentMethod: '',
+        sortBy: 'expenseDate',
+        order: 'desc',
         page: 1,
         limit: 10
     });
+    const [filterOpen, setFilterOpen] = useState(false);
 
     useEffect(() => {
         dispatch(fetchExpenses(filters));
@@ -152,15 +160,83 @@ const Expenses = () => {
                             onChange={(e) => setFilters(f => ({ ...f, categoryId: e.target.value, page: 1 }))}
                         >
                             <option value="">All Categories</option>
-                            {categories.map(c => (
+                            {categories?.map(c => (
                                 <option key={c._id} value={c._id}>{c.name}</option>
                             ))}
                         </select>
-                        <Button variant="secondary" className="px-3">
+                        <Button variant="secondary" className="px-3" onClick={() => setFilterOpen(o => !o)}>
                             <Filter size={18} />
                         </Button>
                     </div>
                 </div>
+
+                {filterOpen && (
+                    <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1 block">From Date</label>
+                            <input type="date" value={filters.startDate}
+                                onChange={(e) => setFilters(f => ({ ...f, startDate: e.target.value, page: 1 }))}
+                                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium" />
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1 block">To Date</label>
+                            <input type="date" value={filters.endDate}
+                                onChange={(e) => setFilters(f => ({ ...f, endDate: e.target.value, page: 1 }))}
+                                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium" />
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1 block">Min Amount</label>
+                            <input type="number" placeholder="₹0" value={filters.minAmount}
+                                onChange={(e) => setFilters(f => ({ ...f, minAmount: e.target.value, page: 1 }))}
+                                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium" />
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1 block">Max Amount</label>
+                            <input type="number" placeholder="₹999999" value={filters.maxAmount}
+                                onChange={(e) => setFilters(f => ({ ...f, maxAmount: e.target.value, page: 1 }))}
+                                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium" />
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1 block">Payment Method</label>
+                            <select value={filters.paymentMethod}
+                                onChange={(e) => setFilters(f => ({ ...f, paymentMethod: e.target.value, page: 1 }))}
+                                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium">
+                                <option value="">All Methods</option>
+                                <option value="Cash">Cash</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Debit Card">Debit Card</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1 block">Sort By</label>
+                            <select value={filters.sortBy}
+                                onChange={(e) => setFilters(f => ({ ...f, sortBy: e.target.value }))}
+                                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium">
+                                <option value="expenseDate">Date</option>
+                                <option value="amount">Amount</option>
+                                <option value="title">Title</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1 block">Order</label>
+                            <select value={filters.order}
+                                onChange={(e) => setFilters(f => ({ ...f, order: e.target.value }))}
+                                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 outline-none focus:ring-2 focus:ring-indigo-500/20 text-sm font-medium">
+                                <option value="desc">Newest First</option>
+                                <option value="asc">Oldest First</option>
+                            </select>
+                        </div>
+                        <div className="flex items-end">
+                            <Button variant="secondary" className="w-full" onClick={() => {
+                                setFilters({ search: '', categoryId: '', startDate: '', endDate: '', minAmount: '', maxAmount: '', paymentMethod: '', sortBy: 'expenseDate', order: 'desc', page: 1, limit: 10 });
+                            }}>
+                                Clear Filters
+                            </Button>
+                        </div>
+                    </div>
+                )}
             </Card>
 
             {/* Table Section */}
@@ -225,25 +301,48 @@ const Expenses = () => {
                     </table>
                 </div>
 
-                {/* Improved Pagination */}
+                {/* Pagination */}
                 <div className="px-6 py-4 bg-slate-50/50 dark:bg-slate-800/30 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">
                         {pagination.total || 0} Records Found
                     </p>
-                    <div className="flex items-center gap-3">
-                        <button
-                            className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 disabled:opacity-30"
+                    <div className="flex items-center gap-2">
+                        <button className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 disabled:opacity-30"
                             disabled={!pagination.hasPrevPage}
-                            onClick={() => setFilters(f => ({ ...f, page: f.page - 1 }))}
-                        ><ChevronLeft size={18} /></button>
-                        <div className="flex items-center gap-1">
-                            <span className="px-4 py-2 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md">Pagina {pagination.page}</span>
-                        </div>
-                        <button
-                            className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 disabled:opacity-30"
+                            onClick={() => setFilters(f => ({ ...f, page: f.page - 1 }))}>
+                            <ChevronLeft size={18} />
+                        </button>
+                        {(() => {
+                            const total = pagination.totalPages || 1;
+                            const current = pagination.page || 1;
+                            const pages = [];
+                            const start = Math.max(1, current - 2);
+                            const end = Math.min(total, current + 2);
+                            if (start > 1) pages.push(1);
+                            if (start > 2) pages.push('...');
+                            for (let i = start; i <= end; i++) pages.push(i);
+                            if (end < total - 1) pages.push('...');
+                            if (end < total) pages.push(total);
+                            return pages.map((p, i) =>
+                                p === '...' ? (
+                                    <span key={`ellipsis-${i}`} className="px-2 text-slate-400 font-bold text-sm">...</span>
+                                ) : (
+                                    <button key={p}
+                                        className={`min-w-[36px] h-9 rounded-xl text-sm font-bold shadow-sm transition-all ${p === current
+                                            ? 'bg-indigo-600 text-white shadow-md'
+                                            : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                                            }`}
+                                        onClick={() => setFilters(f => ({ ...f, page: p }))}>
+                                        {p}
+                                    </button>
+                                )
+                            );
+                        })()}
+                        <button className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 disabled:opacity-30"
                             disabled={!pagination.hasNextPage}
-                            onClick={() => setFilters(f => ({ ...f, page: f.page + 1 }))}
-                        ><ChevronRight size={18} /></button>
+                            onClick={() => setFilters(f => ({ ...f, page: f.page + 1 }))}>
+                            <ChevronRight size={18} />
+                        </button>
                     </div>
                 </div>
             </Card>

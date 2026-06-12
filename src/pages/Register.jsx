@@ -31,9 +31,9 @@ const Register = () => {
 
                 <div className="relative z-10 flex items-center gap-3">
                     <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-indigo-600 shadow-xl">
-                        <span className="font-extrabold text-2xl">N</span>
+                        <span className="font-extrabold text-2xl">E</span>
                     </div>
-                    <span className="text-2xl font-bold tracking-tight text-white focus:outline-none">NexPrism</span>
+                    <span className="text-2xl font-bold tracking-tight text-white focus:outline-none">Expense Tracker</span>
                 </div>
 
                 <div className="relative z-10">
@@ -64,7 +64,7 @@ const Register = () => {
                 <Card className="w-full max-w-lg p-8 lg:p-10 border-none lg:border shadow-none lg:shadow-premium bg-transparent lg:bg-white dark:lg:bg-slate-900">
                     <div className="mb-8">
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Create Account</h2>
-                        <p className="text-slate-500 dark:text-slate-400">Join the NexPrism family today</p>
+                        <p className="text-slate-500 dark:text-slate-400">Join Expense Tracker today</p>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

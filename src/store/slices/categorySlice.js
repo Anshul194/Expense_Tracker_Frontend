@@ -4,7 +4,7 @@ import api, { getConfig } from '../../api/config';
 export const fetchCategories = createAsyncThunk('categories/fetchAll', async (_, { rejectWithValue }) => {
     try {
         const res = await api.get('/categories', getConfig());
-        return res.data.data.categories;
+        return res.data.data;
     } catch (err) {
         return rejectWithValue(err.response?.data?.message || 'Failed to fetch categories');
     }
@@ -13,7 +13,7 @@ export const fetchCategories = createAsyncThunk('categories/fetchAll', async (_,
 export const addCategory = createAsyncThunk('categories/add', async (categoryData, { rejectWithValue }) => {
     try {
         const res = await api.post('/categories', categoryData, getConfig());
-        return res.data.data.category;
+        return res.data.data;
     } catch (err) {
         return rejectWithValue(err.response?.data?.message || 'Failed to add category');
     }
@@ -22,7 +22,7 @@ export const addCategory = createAsyncThunk('categories/add', async (categoryDat
 export const updateCategory = createAsyncThunk('categories/update', async ({ id, data }, { rejectWithValue }) => {
     try {
         const res = await api.put(`/categories/${id}`, data, getConfig());
-        return res.data.data.category;
+        return res.data.data;
     } catch (err) {
         return rejectWithValue(err.response?.data?.message || 'Failed to update category');
     }

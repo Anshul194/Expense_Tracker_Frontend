@@ -29,9 +29,9 @@ const Login = () => {
 
                 <div className="relative z-10 flex items-center gap-3">
                     <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-indigo-600 shadow-xl">
-                        <span className="font-extrabold text-2xl">N</span>
+                        <span className="font-extrabold text-2xl">E</span>
                     </div>
-                    <span className="text-2xl font-bold tracking-tight text-white">NexPrism</span>
+                    <span className="text-2xl font-bold tracking-tight text-white">Expense Tracker</span>
                 </div>
 
                 <div className="relative z-10">
@@ -44,7 +44,7 @@ const Login = () => {
                 </div>
 
                 <div className="relative z-10 text-indigo-200/60 text-sm">
-                    © 2026 NexPrism Financial. Premium Expense Management.
+                    © 2026 Expense Tracker. Premium Expense Management.
                 </div>
             </div>
 
@@ -53,9 +53,9 @@ const Login = () => {
                 {/* Mobile Logo */}
                 <div className="absolute top-10 left-10 lg:hidden flex items-center gap-2">
                     <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
-                        <span className="font-bold">N</span>
+                        <span className="font-bold">E</span>
                     </div>
-                    <span className="font-bold text-slate-900 dark:text-white">NexPrism</span>
+                    <span className="font-bold text-slate-900 dark:text-white">Expense Tracker</span>
                 </div>
 
                 <Card className="w-full max-w-md p-8 lg:p-10 border-none lg:border shadow-none lg:shadow-premium bg-transparent lg:bg-white dark:lg:bg-slate-900">
@@ -118,7 +118,7 @@ const Login = () => {
                     </form>
 
                     <p className="mt-8 text-center text-slate-500 dark:text-slate-400 text-sm font-medium">
-                        Don't have an account? <Link to="/register" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Join NexPrism</Link>
+                        Don't have an account? <Link to="/register" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Join Expense Tracker</Link>
                     </p>
                 </Card>
             </div>

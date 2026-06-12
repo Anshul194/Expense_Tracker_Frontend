@@ -1,10 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../../api/config';
 
+const saveSession = (token, user) => {
+    localStorage.setItem('accessToken', token);
+    localStorage.setItem('user', JSON.stringify(user));
+};
+
+const clearSession = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
+};
+
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
     try {
         const res = await api.post('/auth/login', credentials);
-        localStorage.setItem('accessToken', res.data.data.accessToken);
+        saveSession(res.data.data.accessToken, res.data.data.user);
         return res.data.data.user;
     } catch (err) {
         return rejectWithValue(err.response?.data?.message || 'Login failed');
@@ -14,7 +24,7 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
 export const register = createAsyncThunk('auth/register', async (userData, { rejectWithValue }) => {
     try {
         const res = await api.post('/auth/register', userData);
-        localStorage.setItem('accessToken', res.data.data.accessToken);
+        saveSession(res.data.data.accessToken, res.data.data.user);
         return res.data.data.user;
     } catch (err) {
         return rejectWithValue(err.response?.data?.message || 'Registration failed');
@@ -22,16 +32,19 @@ export const register = createAsyncThunk('auth/register', async (userData, { rej
 });
 
 export const checkAuth = createAsyncThunk('auth/check', async (_, { rejectWithValue }) => {
-    try {
-        const token = localStorage.getItem('accessToken');
-        if (!token) throw new Error('No token');
+    const token = localStorage.getItem('accessToken');
+    if (!token) return rejectWithValue('Not authenticated');
 
+    try {
         const res = await api.get('/auth/me', {
             headers: { Authorization: `Bearer ${token}` }
         });
-        return res.data.data.user;
-    } catch (err) {
-        localStorage.removeItem('accessToken');
+        saveSession(token, res.data.data);
+        return res.data.data;
+    } catch {
+        const cached = localStorage.getItem('user');
+        if (cached) return JSON.parse(cached);
+        clearSession();
         return rejectWithValue('Not authenticated');
     }
 });
@@ -40,7 +53,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     try {
         await api.post('/auth/logout');
     } finally {
-        localStorage.removeItem('accessToken');
+        clearSession();
     }
 });
 
